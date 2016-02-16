@@ -11,7 +11,7 @@ public class SampleModel {
 
     private Side mSide;
 
-    public SampleModel() {
+    public SampleModel(String s, String s1) {
         this.mQuestion = "new question";
         this.mAnswer = "new answer";
         this.mSide  = Side.QUESTION;

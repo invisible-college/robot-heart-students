@@ -17,6 +17,14 @@ public class SampleRecyclerAdapter extends RecyclerView.Adapter<SampleRecyclerAd
     private final ArrayList<SampleModel> sampleData = new ArrayList<>();
 
     public SampleRecyclerAdapter(RecyclerView rv) {
+        sampleData.add(
+            new SampleModel("What do you call an alligator in a trench coat?","An investigator")
+        );
+
+        sampleData.add(
+            new SampleModel("What do you call a kitten on a hill?","A meowntain.")
+        );
+
         rv.setAdapter(this);
         rv.setOnClickListener(this);
     }
@@ -54,7 +62,7 @@ public class SampleRecyclerAdapter extends RecyclerView.Adapter<SampleRecyclerAd
             positionToAdd = 0;
         }
         int nextSize = sampleData.size() + 1;
-        SampleModel sampleModel = new SampleModel();
+        SampleModel sampleModel = new SampleModel("What do you call an alligator in a trench coat?", "An investigator");
         sampleModel.setQuestion("" + nextSize);
         sampleModel.setAnswer("" + nextSize);
         sampleData.add(positionToAdd, sampleModel);
