@@ -20,10 +20,13 @@ public class SampleRecyclerAdapter extends RecyclerView.Adapter<SampleRecyclerAd
     private final List<SampleModel> sampleData = new ArrayList<>();
 
     public SampleRecyclerAdapter(RecyclerView rv) {
-        sampleData.add(new SampleModel("What do you call an alligator in a trenchcoat?", "An invesitgator"));
-        sampleData.add(new SampleModel("What do you call a kitten on a hill?", "A meowtain!"));
+        sampleData.add(
+            new SampleModel("What do you call an alligator in a trench coat?","An investigator")
+        );
 
-
+        sampleData.add(
+            new SampleModel("What do you call a kitten on a hill?","A meowntain.")
+        );
 
         rv.setAdapter(this);
         rv.setOnClickListener(this);
