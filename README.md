@@ -51,7 +51,7 @@ We'll learn how to add a list view to our story-board app, so we can view multip
 
 Wednesday, February 10th, 6-8pm PST, 9-11pm EST
 
-[Join us at this hangout!](https://hangouts.google.com/call/ywdsp4wem6dkzhrxqh3xj4v4jaa)
+[Session 4 Screenrecording](https://youtu.be/IwU-29K43Lw)
 
 We'll add support for Parse, an online web app platform that will let us store data on the cloud, and also get dynamic new data from the cloud.
 
@@ -59,7 +59,7 @@ We'll add support for Parse, an online web app platform that will let us store d
 
 Monday, February 15th, 6-8pm PST, 9-11pm EST
 
-[Google Hangout-on-Air](https://plus.google.com/events/cdfm6n7tl8fv7rnmhbm7kfba818)
+Screenrecording to come soon
 
 We'll learn how to create a simple map view using the Google Maps API to capture a user's geographical location as a useful input for our app. We'll use this to geographically tag our images and sounds from earlier with a physical location.
 
@@ -67,7 +67,8 @@ We'll learn how to create a simple map view using the Google Maps API to capture
 
 Wednesday, February 17th, 6-8pm PST, 9-11pm EST
 
-[Google Hangout-on-Air](https://plus.google.com/events/c634o8lua297u9fgmdkv0tng3q8)
+
+[Join us at this hangout](https://hangouts.google.com/call/ktmaalnvqtupb6c7656szai7iea)
 
 We'll learn how to use the new MapBox API, an alternative to Google Maps that uses the open source OpenStreetMaps, and we'll save geographical markers to offline storage on our mobile device. This is useful for data that we want available even when we lose cell phone reception or wifi connectivity.
 
