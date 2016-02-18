@@ -59,7 +59,7 @@ We'll add support for Parse, an online web app platform that will let us store d
 
 Monday, February 15th, 6-8pm PST, 9-11pm EST
 
-Screenrecording to come soon
+[Adrian's original screenrecording for Session 5 material](https://clip.mn/tag/ODgwZDJmZjE)
 
 We'll learn how to create a simple map view using the Google Maps API to capture a user's geographical location as a useful input for our app. We'll use this to geographically tag our images and sounds from earlier with a physical location.
 
@@ -67,8 +67,7 @@ We'll learn how to create a simple map view using the Google Maps API to capture
 
 Wednesday, February 17th, 6-8pm PST, 9-11pm EST
 
-
-[Join us at this hangout](https://hangouts.google.com/call/ktmaalnvqtupb6c7656szai7iea)
+[Session 6 screenrecording](https://www.youtube.com/watch?feature=player_embedded&v=EQJ0O3Q0sKg)
 
 We'll learn how to use the new MapBox API, an alternative to Google Maps that uses the open source OpenStreetMaps, and we'll save geographical markers to offline storage on our mobile device. This is useful for data that we want available even when we lose cell phone reception or wifi connectivity.
 
