@@ -63,12 +63,86 @@ public class GameActivity extends AppCompatActivity implements CustomView.Custom
         mFloorPaint = new Paint();
         Bitmap floorBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.floor);
         BitmapShader shader = new BitmapShader(floorBitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        mFloorPaint.setShader(shader);
+
+        ArrayList robotBitmaps = new ArrayList<>();
+
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_01) );
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_02) );
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_03) );
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_04) );
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_05) );
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_06) );
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_07) );
+        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_08) );
+
+        mRobot = new AnimatedSprite(robotBitmaps);
+
+        setupSound();
+    }
+
+    public void setupSound() {
+    //check 5.0
+        if (Build.VERSION.SDK_INT >= 21) {
+            mSoundPool = new SoundPool.Builder().setMaxStreams(5).build();
+        } else {
+            mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 1);
+        }
+
+        mHitSound = mSoundPool.load(this, R.raw.click1, 1);
+        mMissSound = mSoundPool.load(this, R.raw.click2, 1);
+        mGameOverSound = mSoundPool.load(this, R.raw.gameover, 1);
 
     }
 
     @Override
-    public void onUpdate(long elapsedTime) {
+    protected void onResume() {
+        super.onResume();
 
+        if (mGameView != null) {
+            mGameView.resume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mGameView != null) {
+            mGameView.pause();
+        }
+    }
+
+    @Override
+    public void onUpdate(long elapsedTime) {
+        mScreenRect.set(0, 0, mGameView.getWidth(), mGameView.getHeight());
+        mLoops++;
+
+        mTimer += elapsedTime;
+
+        if (mTimer > mMaxTimer){
+            gameOver();
+        }
+
+        mRobot.update(elapsedTime);
+
+        //Check if robot escaped
+        if (!RectF.intersects(mScreenRect, mRobot.getRect())){
+            //change to random positions
+            mRobot.randomized(mScreenRect);
+
+            //penalty
+            mScore -= 50;
+            if (mScore < 0){
+                mScore = 0;
+            }
+        }
+
+        if (mRobot.isDead()){
+            if (mScreenRect.width() > 0 && mScreenRect.height() > 0){
+                mRobot.randomized(mScreenRect);
+            }
+        }
     }
 
     @Override
@@ -80,4 +154,6 @@ public class GameActivity extends AppCompatActivity implements CustomView.Custom
     public boolean onTouch(View v, MotionEvent event) {
         return false;
     }
+
+
 }
