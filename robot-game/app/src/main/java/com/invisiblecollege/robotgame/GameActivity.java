@@ -147,13 +147,68 @@ public class GameActivity extends AppCompatActivity implements CustomView.Custom
 
     @Override
     public void onDraw(Canvas c) {
-
+        c.drawPaint(mFloorPaint);
+        mRobot.draw(c);
+        c.drawText("Time: " + (60 - (mTimer / 1000)), 50, 50, mPaint);
+        String scoreText = "Score: " + String.valueOf(mScore);
+        float widthOfText = mPaint.measureText(scoreText);
+        c.drawText(scoreText, mScreenRect.width() - 50 - widthOfText, 50, mPaint);
     }
+
+    public void gameOver() {
+        // play a gameover sound
+        mSoundPool.play(mGameOverSound, 1, 1, 1, 0, 1);
+
+        // goto results activity
+        Intent intent = new Intent(this, ResultsActivity.class);
+        intent.putExtra("score", mScore);
+        startActivity(intent);
+        mGameView.pause();
+        finish();
+    }
+
+    private void userTapped(float x, float y){
+        //Check to see if robot is pressed
+        if (mRobot.wasTapped(x, y)){
+            mScore += 10;
+
+            //hit sound
+            mSoundPool.play(mHitSound, 1, 1, 1, 0, 1);
+        }
+        else {
+            //miss sound
+            mSoundPool.play(mMissSound, 1, 1, 1, 0, 1);
+
+        }
+    }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        return false;
-    }
+        int action = event.getAction();
 
+        switch (action &  MotionEvent.ACTION_MASK){
+            case MotionEvent.ACTION_DOWN:
+                float x = event.getX();
+                float y = event.getY();
+
+                //send finger data to another method
+
+                userTapped(x, y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                break;
+        }
+
+        return true;
+    }
 
 }
