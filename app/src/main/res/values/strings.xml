@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">RobotHello</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_string">Hola mundo!</string>
-    <string name="goodbye_string">Auf wiedersehen!</string>
-    <string name="title_activity_camera">CameraActivity</string>
-    <string name="title_activity_sound">SoundActivity</string>
-    <string name="title_activity_list">ListActivity</string>
+    <string name="app_name">Robot Game</string>
+    <string name="play">Play</string>
+    <string name="score">Score</string>
+    <string name="score_colon">Score:</string>
+    <string name="highscore">Highscore</string>
+    <string name="view_highscores">View Highscores</string>
+    <string name="highscore_colon">Highscore:</string>
+    <string name="date_colon">Date:</string>
+    <string name="back">Back</string>
+    <string name="gameover">Game Over</string>
+
 </resources>
