@@ -36,7 +36,7 @@ public class GameActivity extends AppCompatActivity implements CustomView.Custom
     Paint mPaint;
     Paint mFloorPaint;
 
-    AnimatedSprite mRobot;
+    ArrayList<AnimatedSprite> mRobots;
 
     long mTimer = 0;
     long mMaxTimer = 60000;
@@ -69,14 +69,19 @@ public class GameActivity extends AppCompatActivity implements CustomView.Custom
 
         robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_01) );
         robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_02) );
-        robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_03) );
+        robotBitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_03));
         robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_04) );
         robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_05) );
         robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_06) );
         robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_07) );
         robotBitmaps.add( BitmapFactory.decodeResource(getResources(), R.mipmap.robot_move_08) );
 
-        mRobot = new AnimatedSprite(robotBitmaps);
+        mRobots = new ArrayList<>();
+        mRobots.add(new AnimatedSprite(robotBitmaps));
+        mRobots.add(new AnimatedSprite(robotBitmaps));
+        mRobots.add(new AnimatedSprite(robotBitmaps));
+        mRobots.add(new AnimatedSprite(robotBitmaps));
+        mRobots.add(new AnimatedSprite(robotBitmaps));
 
         setupSound();
     }
@@ -124,31 +129,36 @@ public class GameActivity extends AppCompatActivity implements CustomView.Custom
             gameOver();
         }
 
-        mRobot.update(elapsedTime);
+        for (AnimatedSprite robot : mRobots) {
+            robot.update(elapsedTime);
 
-        //Check if robot escaped
-        if (!RectF.intersects(mScreenRect, mRobot.getRect())){
-            //change to random positions
-            mRobot.randomized(mScreenRect);
+            //Check if robot escaped
+            if (!RectF.intersects(mScreenRect, robot.getRect())){
+                //change to random positions
+                robot.randomized(mScreenRect);
 
-            //penalty
-            mScore -= 50;
-            if (mScore < 0){
-                mScore = 0;
+                //penalty
+                mScore -= 50;
+                if (mScore < 0){
+                    mScore = 0;
+                }
+            }
+
+            if (robot.isDead()){
+                if (mScreenRect.width() > 0 && mScreenRect.height() > 0){
+                    robot.randomized(mScreenRect);
+                }
             }
         }
 
-        if (mRobot.isDead()){
-            if (mScreenRect.width() > 0 && mScreenRect.height() > 0){
-                mRobot.randomized(mScreenRect);
-            }
-        }
     }
 
     @Override
     public void onDraw(Canvas c) {
         c.drawPaint(mFloorPaint);
-        mRobot.draw(c);
+        for (AnimatedSprite robot : mRobots) {
+            robot.draw(c);
+        }
         c.drawText("Time: " + (60 - (mTimer / 1000)), 50, 50, mPaint);
         String scoreText = "Score: " + String.valueOf(mScore);
         float widthOfText = mPaint.measureText(scoreText);
@@ -169,17 +179,20 @@ public class GameActivity extends AppCompatActivity implements CustomView.Custom
 
     private void userTapped(float x, float y){
         //Check to see if robot is pressed
-        if (mRobot.wasTapped(x, y)){
-            mScore += 10;
+        for (AnimatedSprite robot : mRobots) {
+            if (robot.wasTapped(x, y)){
+                mScore += 10;
 
-            //hit sound
-            mSoundPool.play(mHitSound, 1, 1, 1, 0, 1);
+                //hit sound
+                mSoundPool.play(mHitSound, 1, 1, 1, 0, 1);
+            }
+//            else {
+//                //miss sound
+//                mSoundPool.play(mMissSound, 1, 1, 1, 0, 1);
+//
+//            }
         }
-        else {
-            //miss sound
-            mSoundPool.play(mMissSound, 1, 1, 1, 0, 1);
 
-        }
     }
 
 

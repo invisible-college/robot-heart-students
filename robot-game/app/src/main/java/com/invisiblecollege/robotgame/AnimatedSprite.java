@@ -69,6 +69,7 @@ public class AnimatedSprite {
         if (elapsedTime > 100){
             elapsedTime = 100;
         }
+        elapsedTime *= 0.5f;
         mTimer += elapsedTime;
 
         if (mTimer >= mTimeBetweenFrames){
@@ -78,8 +79,8 @@ public class AnimatedSprite {
 
 
         //TODO Change movement to time based
-        mX += (elapsedTime/1000f) * mMovementXPerSecond;
-        mY += (elapsedTime/1000f) * mMovementYPerSecond;
+        mX += (elapsedTime/1000f) * mMovementXPerSecond + 2 * Math.sin(mTimer/10);
+        mY += (elapsedTime/1000f) * mMovementYPerSecond + 2 * Math.sin(mTimer/10);
 
         Bitmap bitmap = mBitmaps.get(mCurrentFrame);
 
