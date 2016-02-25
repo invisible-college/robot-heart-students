@@ -17,7 +17,7 @@ public class AnimatedSprite {
     private float mX;
     private  float mY;
 
-    private float mMovementSpeed = 150;
+    private float mMovementSpeed = 300;
 
     private float mMovementXPerSecond = mMovementSpeed;
     private float mMovementYPerSecond = mMovementSpeed;
